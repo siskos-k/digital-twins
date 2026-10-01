@@ -1,0 +1,36 @@
+name: DigitalTwins
+options:
+  bundleIdPrefix: personal.ntua
+  deploymentTarget:
+    iOS: '17.0'
+packages:
+  Core:
+    path: .
+settings:
+  base:
+    SWIFT_VERSION: '5.0'
+    DEVELOPMENT_TEAM: ''
+targets:
+  DigitalTwins:
+    type: application
+    platform: iOS
+    sources: [Sources/App]
+    dependencies:
+      - package: Core
+        product: RoomTwinCore
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: personal.ntua.DigitalTwins
+        TARGETED_DEVICE_FAMILY: '1'
+        SUPPORTS_MACCATALYST: NO
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: Digital Twins
+        INFOPLIST_KEY_NSCameraUsageDescription: DigitalTwins uses the camera and LiDAR to create a 3D model of your room.
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
+schemes:
+  DigitalTwins:
+    build:
+      targets:
+        DigitalTwins: all

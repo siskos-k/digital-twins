@@ -1,0 +1,11 @@
+name: Validate
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Storage tests
+        run: swift test
+      - name: Unsigned iOS build
+        run: xcodebuild -project DigitalTwins.xcodeproj -scheme DigitalTwins -destination 'generic/platform=iOS' -derivedDataPath /tmp/digital-twins-build CODE_SIGNING_ALLOWED=NO build
