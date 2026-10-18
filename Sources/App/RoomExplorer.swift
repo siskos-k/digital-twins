@@ -20,7 +20,6 @@ struct RoomExplorer: View {
     @State private var selected: Equipment?
     @State private var reset = UUID()
     @State private var error: String?
-    @State private var settings = false
     @Environment(\.dismiss) private var dismiss
     init(room: SavedRoom, url: URL) {
         self.room = room; self.url = url
@@ -74,7 +73,6 @@ struct RoomExplorer: View {
             .navigationTitle(room.name).navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) { Button("Close") { dismiss() } }
-                ToolbarItem(placement: .primaryAction) { Button("IoT settings", systemImage: "network") { settings = true } }
             }
             .task {
                 await inventory.load()
@@ -89,7 +87,6 @@ struct RoomExplorer: View {
             .sheet(item: $selected) { device in
                 EquipmentDetail(id: device.id, inventory: inventory, move: { moving = $0; placing = true })
             }
-            .sheet(isPresented: $settings) { IoTSettingsView() }
             .alert("Room navigation", isPresented: Binding(get: { error != nil }, set: { if !$0 { error = nil } })) {
                 Button("OK", role: .cancel) { error = nil }
             } message: { Text(error ?? "") }

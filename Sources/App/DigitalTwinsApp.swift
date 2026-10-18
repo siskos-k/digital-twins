@@ -2,9 +2,17 @@ import SwiftUI
 import RoomPlan
 import RoomTwinCore
 import AVFoundation
+import Security
 
 @main
 struct DigitalTwinsApp: App {
+    init() {
+        // Retire this app's old Mac collector settings and token.
+        UserDefaults.standard.removeObject(forKey: "collectorURL")
+        SecItemDelete([kSecClass as String: kSecClassGenericPassword,
+                       kSecAttrService as String: "personal.ntua.DigitalTwins.collector",
+                       kSecAttrAccount as String: "api-token"] as CFDictionary)
+    }
     var body: some Scene { WindowGroup { LibraryView() } }
 }
 
@@ -26,7 +34,6 @@ final class LibraryModel: ObservableObject {
 
 struct LibraryView: View {
     @StateObject private var library = LibraryModel()
-    @State private var showSettings = false
     @State private var creatingSample = false
     @State private var scanning = false
     @State private var requestingPermission = false
@@ -56,7 +63,6 @@ struct LibraryView: View {
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Menu {
-                        Button("IoT settings", systemImage: "network") { showSettings = true }
                         Button(creatingSample ? "Creating sample…" : "Add sample room", systemImage: "cube") {
                             creatingSample = true
                             Task { @MainActor in
@@ -68,7 +74,6 @@ struct LibraryView: View {
                     } label: { Image(systemName: "ellipsis.circle") }.accessibilityLabel("Room options").accessibilityIdentifier("roomOptions")
                 }
             }
-            .sheet(isPresented: $showSettings) { IoTSettingsView() }
             .safeAreaInset(edge: .bottom) {
                 VStack(spacing: 12) {
                     if !supported { Text("Scanning requires a LiDAR-equipped iPhone. Saved rooms can still be reviewed and exported.").font(.footnote).foregroundStyle(.secondary) }

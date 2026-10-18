@@ -1,7 +1,7 @@
 import Foundation
 import CSQLite
 
-/// Serializes SQLite access from UI refreshes and HTTP responses.
+/// Serializes SQLite access from equipment changes and locally generated readings.
 public actor EquipmentStore {
     private var database: OpaquePointer?
     public init(url: URL) throws {

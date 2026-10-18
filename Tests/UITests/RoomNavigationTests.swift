@@ -33,6 +33,12 @@ final class RoomNavigationTests: XCTestCase {
         XCTAssertTrue(equipment.waitForExistence(timeout: 5))
         equipment.tap()
         XCTAssertTrue(app.staticTexts["No readings yet"].waitForExistence(timeout: 5))
+        app.buttons["Start demo readings"].tap()
+        XCTAssertTrue(app.staticTexts["SIMULATED · saved on this iPhone"].waitForExistence(timeout: 5))
+        app.buttons["Stop demo readings"].tap()
+        XCTAssertTrue(app.buttons["Start demo readings"].exists)
+        let demo = XCTAttachment(screenshot: app.screenshot()); demo.name = "On-device simulated readings"; demo.lifetime = .keepAlways
+        add(demo)
         app.buttons["Done"].tap()
         let overview = XCTAttachment(screenshot: app.screenshot()); overview.name = "Overview with equipment"; overview.lifetime = .keepAlways
         add(overview)

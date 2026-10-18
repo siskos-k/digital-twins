@@ -44,9 +44,7 @@ final class EquipmentTests: XCTestCase {
         XCTAssertTrue(values.isEmpty)
     }
     func testEquipmentValidation() throws {
-        var device = Equipment(roomID: UUID(), name: "Sensor", position: .init(x: 0, y: 0, z: 0), topic: "room/+/temperature")
-        XCTAssertThrowsError(try device.validated())
-        device.topic = "room/sensor1"
+        var device = Equipment(roomID: UUID(), name: "Sensor", position: .init(x: 0, y: 0, z: 0))
         XCTAssertNoThrow(try device.validated())
         device.position.y = .nan
         XCTAssertThrowsError(try device.validated())
@@ -57,16 +55,11 @@ final class EquipmentTests: XCTestCase {
         var device = Equipment(roomID: UUID(), name: "AC", kind: .airConditioner, position: .init(x: 1, y: 2, z: 0))
         var json = try JSONSerialization.jsonObject(with: JSONEncoder().encode(device)) as! [String: Any]
         json.removeValue(forKey: "surfaceNormal")
+        json["topic"] = "legacy/sensor"
+        json["collectorEndpoint"] = "http://old-mac.local:8080"
         let old = try JSONDecoder().decode(Equipment.self, from: JSONSerialization.data(withJSONObject: json))
         XCTAssertNil(old.surfaceNormal)
         device.surfaceNormal = .init(x: 0, y: 0, z: 1)
         XCTAssertEqual(try JSONDecoder().decode(Equipment.self, from: JSONEncoder().encode(device)), device)
-    }
-    func testTelemetryEndpointValidation() throws {
-        XCTAssertThrowsError(try TelemetryClient(endpoint: "file:///tmp", token: "token"))
-        XCTAssertThrowsError(try TelemetryClient(endpoint: "http://collector.local:8080", token: ""))
-        XCTAssertThrowsError(try TelemetryClient(endpoint: "http://external.example.com", token: "token"))
-        XCTAssertNoThrow(try TelemetryClient(endpoint: "http://collector.local:8080", token: "token"))
-        XCTAssertNoThrow(try TelemetryClient(endpoint: "https://collector.example.com", token: "token"))
     }
 }

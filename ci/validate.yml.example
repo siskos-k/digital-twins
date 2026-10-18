@@ -7,7 +7,5 @@ jobs:
       - uses: actions/checkout@v4
       - name: Storage tests
         run: swift test
-      - name: Collector tests
-        run: python3 -m unittest discover -s service/tests -v
       - name: Unsigned iOS build
         run: xcodebuild -project DigitalTwins.xcodeproj -scheme DigitalTwins -destination 'generic/platform=iOS' -derivedDataPath /tmp/digital-twins-build CODE_SIGNING_ALLOWED=NO build

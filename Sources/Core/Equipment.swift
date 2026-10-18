@@ -43,22 +43,16 @@ public struct Equipment: Codable, Identifiable, Equatable {
     public var manufacturer: String
     public var model: String
     public var notes: String
-    public var topic: String
-    public var collectorEndpoint: String?
     public init(id: UUID = UUID(), roomID: UUID, name: String = "", kind: EquipmentKind = .environment,
-                position: RoomPosition, manufacturer: String = "", model: String = "", notes: String = "", topic: String = "") {
+                position: RoomPosition, manufacturer: String = "", model: String = "", notes: String = "") {
         self.id = id; self.roomID = roomID; self.name = name; self.kind = kind; self.position = position
-        self.manufacturer = manufacturer; self.model = model; self.notes = notes; self.topic = topic
+        self.manufacturer = manufacturer; self.model = model; self.notes = notes
     }
     public func validated() throws -> Equipment {
         var result = self
         result.name = name.trimmingCharacters(in: .whitespacesAndNewlines)
-        result.topic = topic.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !result.name.isEmpty else { throw EquipmentError.invalid("Enter an equipment name.") }
         guard [position.x, position.y, position.z].allSatisfy({ $0.isFinite }) else { throw EquipmentError.invalid("Equipment position is invalid.") }
-        guard !result.topic.contains("#"), !result.topic.contains("+"), !result.topic.contains("\0"), result.topic.utf8.count <= 512 else {
-            throw EquipmentError.invalid("Use one exact MQTT topic without wildcards (maximum 512 bytes).")
-        }
         return result
     }
 }

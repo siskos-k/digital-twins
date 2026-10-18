@@ -20,7 +20,6 @@
 		B9BAD4DE4B6BC854ADA16993 /* DigitalTwinsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A801D23AC7BE121A99057338 /* DigitalTwinsApp.swift */; };
 		CC2FADBA7E3BC3A936EF4BF4 /* FurnitureGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED23D18106EA1F8A83F882C /* FurnitureGeometry.swift */; };
 		E667AD4306B11E01655AC2D5 /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E6C1FBEC94D77FA9585114 /* ReviewView.swift */; };
-		F684EAD233E1F5B969F91777 /* IoTSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A86501B9BB51412F607542 /* IoTSettings.swift */; };
 		FD69166F8F7279A4A8A93796 /* SampleRoomFurnished.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 3D2631098C60A87BAD522ACD /* SampleRoomFurnished.usdz */; };
 /* End PBXBuildFile section */
 
@@ -46,7 +45,6 @@
 		04CCC08477BBD5A5A4819AC8 /* Scanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scanner.swift; sourceTree = "<group>"; };
 		067AD2CF576B782924518478 /* RoomExplorer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomExplorer.swift; sourceTree = "<group>"; };
 		06E6C1FBEC94D77FA9585114 /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
-		18A86501B9BB51412F607542 /* IoTSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IoTSettings.swift; sourceTree = "<group>"; };
 		2F69533A02AC027B9BA81392 /* DigitalTwinsRenderingTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = DigitalTwinsRenderingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D2631098C60A87BAD522ACD /* SampleRoomFurnished.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = SampleRoomFurnished.usdz; sourceTree = "<group>"; };
 		3F9A9BD96658B93EEAAFA285 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -83,7 +81,6 @@
 				C19E8AD006504A557E8B2FFB /* FurnishedRoomRenderer.swift */,
 				FED23D18106EA1F8A83F882C /* FurnitureGeometry.swift */,
 				3F9A9BD96658B93EEAAFA285 /* Info.plist */,
-				18A86501B9BB51412F607542 /* IoTSettings.swift */,
 				06E6C1FBEC94D77FA9585114 /* ReviewView.swift */,
 				067AD2CF576B782924518478 /* RoomExplorer.swift */,
 				000D6B3FCCE8849BF183E9CB /* SampleRoom.swift */,
@@ -277,7 +274,6 @@
 				908B74C29F513D86FC22DCF4 /* EquipmentViews.swift in Sources */,
 				B4D8F85BDD3EF39BB4FC0BFC /* FurnishedRoomRenderer.swift in Sources */,
 				CC2FADBA7E3BC3A936EF4BF4 /* FurnitureGeometry.swift in Sources */,
-				F684EAD233E1F5B969F91777 /* IoTSettings.swift in Sources */,
 				E667AD4306B11E01655AC2D5 /* ReviewView.swift in Sources */,
 				32A260CC6ADF116BB7E0BCAA /* RoomExplorer.swift in Sources */,
 				73A1BC2420B3AD3D1231C410 /* SampleRoom.swift in Sources */,
@@ -360,7 +356,6 @@
 				INFOPLIST_FILE = Sources/App/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Digital Twins";
 				INFOPLIST_KEY_NSCameraUsageDescription = "DigitalTwins uses the camera and LiDAR to create a 3D model of your room.";
-				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Digital Twins connects to your local MQTT collector to display equipment readings.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -384,7 +379,6 @@
 				INFOPLIST_FILE = Sources/App/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Digital Twins";
 				INFOPLIST_KEY_NSCameraUsageDescription = "DigitalTwins uses the camera and LiDAR to create a 3D model of your room.";
-				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Digital Twins connects to your local MQTT collector to display equipment readings.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
