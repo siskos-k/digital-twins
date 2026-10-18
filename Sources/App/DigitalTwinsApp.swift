@@ -2,9 +2,17 @@ import SwiftUI
 import RoomPlan
 import RoomTwinCore
 import AVFoundation
+import Security
 
 @main
 struct DigitalTwinsApp: App {
+    init() {
+        // Retire this app's old Mac collector settings and token.
+        UserDefaults.standard.removeObject(forKey: "collectorURL")
+        SecItemDelete([kSecClass as String: kSecClassGenericPassword,
+                       kSecAttrService as String: "personal.ntua.DigitalTwins.collector",
+                       kSecAttrAccount as String: "api-token"] as CFDictionary)
+    }
     var body: some Scene { WindowGroup { LibraryView() } }
 }
 
@@ -26,6 +34,7 @@ final class LibraryModel: ObservableObject {
 
 struct LibraryView: View {
     @StateObject private var library = LibraryModel()
+    @State private var creatingSample = false
     @State private var scanning = false
     @State private var requestingPermission = false
     private let supported = RoomCaptureSession.isSupported
@@ -51,6 +60,20 @@ struct LibraryView: View {
                 }
             }
             .navigationTitle("Digital Twins")
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    Menu {
+                        Button(creatingSample ? "Creating sample…" : "Add sample room", systemImage: "cube") {
+                            creatingSample = true
+                            Task { @MainActor in
+                                defer { creatingSample = false }
+                                do { _ = try await SampleRoom.create(in: library.store); library.reload() }
+                                catch { library.error = error.localizedDescription }
+                            }
+                        }.disabled(creatingSample)
+                    } label: { Image(systemName: "ellipsis.circle") }.accessibilityLabel("Room options").accessibilityIdentifier("roomOptions")
+                }
+            }
             .safeAreaInset(edge: .bottom) {
                 VStack(spacing: 12) {
                     if !supported { Text("Scanning requires a LiDAR-equipped iPhone. Saved rooms can still be reviewed and exported.").font(.footnote).foregroundStyle(.secondary) }

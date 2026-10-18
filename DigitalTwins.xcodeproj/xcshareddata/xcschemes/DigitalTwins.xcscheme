@@ -39,7 +39,31 @@
          </BuildableReference>
       </MacroExpansion>
       <Testables>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A0809D0246CE6F0D8E32DA27"
+               BuildableName = "DigitalTwinsRenderingTests.xctest"
+               BlueprintName = "DigitalTwinsRenderingTests"
+               ReferencedContainer = "container:DigitalTwins.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BEE94FE51F2A3237E5135880"
+               BuildableName = "DigitalTwinsUITests.xctest"
+               BlueprintName = "DigitalTwinsUITests"
+               ReferencedContainer = "container:DigitalTwins.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <CommandLineArguments>
+      </CommandLineArguments>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
