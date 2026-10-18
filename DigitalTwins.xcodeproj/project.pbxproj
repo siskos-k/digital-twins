@@ -8,17 +8,41 @@
 
 /* Begin PBXBuildFile section */
 		1A7F324C4369AADDB983611F /* RoomTwinCore in Frameworks */ = {isa = PBXBuildFile; productRef = 30A99FA16E407DBF56FAD8E3 /* RoomTwinCore */; };
+		32A260CC6ADF116BB7E0BCAA /* RoomExplorer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067AD2CF576B782924518478 /* RoomExplorer.swift */; };
+		51D924E47BA313D7EEF76AA9 /* RoomNavigationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE433CEA59795DA98670591 /* RoomNavigationTests.swift */; };
 		66CC42B6D21D6AA34D6EA5B0 /* Scanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CCC08477BBD5A5A4819AC8 /* Scanner.swift */; };
+		73A1BC2420B3AD3D1231C410 /* SampleRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000D6B3FCCE8849BF183E9CB /* SampleRoom.swift */; };
+		908B74C29F513D86FC22DCF4 /* EquipmentViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC84AE79CA23A1B215116A5B /* EquipmentViews.swift */; };
+		A330661D3DAE964C96B3538A /* SampleRoom.usdz in Resources */ = {isa = PBXBuildFile; fileRef = F6553E33A84489B3E46A1584 /* SampleRoom.usdz */; };
 		B9BAD4DE4B6BC854ADA16993 /* DigitalTwinsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A801D23AC7BE121A99057338 /* DigitalTwinsApp.swift */; };
 		E667AD4306B11E01655AC2D5 /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E6C1FBEC94D77FA9585114 /* ReviewView.swift */; };
+		F684EAD233E1F5B969F91777 /* IoTSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A86501B9BB51412F607542 /* IoTSettings.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		7DDF9F88D91E5133C1CAC48E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4828E192B2F75D423EC5056A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C9496C33B097CCC2251B9B34;
+			remoteInfo = DigitalTwins;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		000D6B3FCCE8849BF183E9CB /* SampleRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleRoom.swift; sourceTree = "<group>"; };
 		04CCC08477BBD5A5A4819AC8 /* Scanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scanner.swift; sourceTree = "<group>"; };
+		067AD2CF576B782924518478 /* RoomExplorer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomExplorer.swift; sourceTree = "<group>"; };
 		06E6C1FBEC94D77FA9585114 /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
+		18A86501B9BB51412F607542 /* IoTSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IoTSettings.swift; sourceTree = "<group>"; };
+		3F9A9BD96658B93EEAAFA285 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		5CE433CEA59795DA98670591 /* RoomNavigationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomNavigationTests.swift; sourceTree = "<group>"; };
 		73C64F3AA62957F023C941DE /* thesis */ = {isa = PBXFileReference; lastKnownFileType = folder; name = thesis; path = .; sourceTree = SOURCE_ROOT; };
+		762B18FB5C74907BFC781647 /* DigitalTwinsUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = DigitalTwinsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		882445692D545912C77815E6 /* DigitalTwins.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = DigitalTwins.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A801D23AC7BE121A99057338 /* DigitalTwinsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitalTwinsApp.swift; sourceTree = "<group>"; };
+		CC84AE79CA23A1B215116A5B /* EquipmentViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentViews.swift; sourceTree = "<group>"; };
+		F6553E33A84489B3E46A1584 /* SampleRoom.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = SampleRoom.usdz; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,7 +61,12 @@
 			isa = PBXGroup;
 			children = (
 				A801D23AC7BE121A99057338 /* DigitalTwinsApp.swift */,
+				CC84AE79CA23A1B215116A5B /* EquipmentViews.swift */,
+				3F9A9BD96658B93EEAAFA285 /* Info.plist */,
+				18A86501B9BB51412F607542 /* IoTSettings.swift */,
 				06E6C1FBEC94D77FA9585114 /* ReviewView.swift */,
+				067AD2CF576B782924518478 /* RoomExplorer.swift */,
+				000D6B3FCCE8849BF183E9CB /* SampleRoom.swift */,
 				04CCC08477BBD5A5A4819AC8 /* Scanner.swift */,
 			);
 			name = App;
@@ -49,6 +78,8 @@
 			children = (
 				091FD5FDAD743CA1E0AE3CA8 /* App */,
 				CC23580243FCC1374DABB984 /* Packages */,
+				BBD562C2C6E650337BC45267 /* Resources */,
+				CB6BE236AD5BCDD220EA06C0 /* UITests */,
 				97B2A1A47CAFFBDEED05E5BF /* Products */,
 			);
 			sourceTree = "<group>";
@@ -57,8 +88,26 @@
 			isa = PBXGroup;
 			children = (
 				882445692D545912C77815E6 /* DigitalTwins.app */,
+				762B18FB5C74907BFC781647 /* DigitalTwinsUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		BBD562C2C6E650337BC45267 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F6553E33A84489B3E46A1584 /* SampleRoom.usdz */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		CB6BE236AD5BCDD220EA06C0 /* UITests */ = {
+			isa = PBXGroup;
+			children = (
+				5CE433CEA59795DA98670591 /* RoomNavigationTests.swift */,
+			);
+			name = UITests;
+			path = Tests/UITests;
 			sourceTree = "<group>";
 		};
 		CC23580243FCC1374DABB984 /* Packages */ = {
@@ -72,11 +121,30 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		BEE94FE51F2A3237E5135880 /* DigitalTwinsUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E4BB0A38A7DDBE8F18B1E79F /* Build configuration list for PBXNativeTarget "DigitalTwinsUITests" */;
+			buildPhases = (
+				FCF1A6725FAAF28E16ED9CBE /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				544EDE08A772C23B7C7807F5 /* PBXTargetDependency */,
+			);
+			name = DigitalTwinsUITests;
+			packageProductDependencies = (
+			);
+			productName = DigitalTwinsUITests;
+			productReference = 762B18FB5C74907BFC781647 /* DigitalTwinsUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		C9496C33B097CCC2251B9B34 /* DigitalTwins */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2BE15D4E2AAA0247FC61BE18 /* Build configuration list for PBXNativeTarget "DigitalTwins" */;
 			buildPhases = (
 				402BD7615F4E81CFBFA8D8FC /* Sources */,
+				2F1D47C5DC822045637C1C59 /* Resources */,
 				06CB9183CCFDADE357A652A9 /* Frameworks */,
 			);
 			buildRules = (
@@ -100,6 +168,10 @@
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
+					BEE94FE51F2A3237E5135880 = {
+						DevelopmentTeam = "";
+						TestTargetID = C9496C33B097CCC2251B9B34;
+					};
 					C9496C33B097CCC2251B9B34 = {
 						DevelopmentTeam = "";
 					};
@@ -123,9 +195,21 @@
 			projectRoot = "";
 			targets = (
 				C9496C33B097CCC2251B9B34 /* DigitalTwins */,
+				BEE94FE51F2A3237E5135880 /* DigitalTwinsUITests */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2F1D47C5DC822045637C1C59 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A330661D3DAE964C96B3538A /* SampleRoom.usdz in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		402BD7615F4E81CFBFA8D8FC /* Sources */ = {
@@ -133,12 +217,32 @@
 			buildActionMask = 2147483647;
 			files = (
 				B9BAD4DE4B6BC854ADA16993 /* DigitalTwinsApp.swift in Sources */,
+				908B74C29F513D86FC22DCF4 /* EquipmentViews.swift in Sources */,
+				F684EAD233E1F5B969F91777 /* IoTSettings.swift in Sources */,
 				E667AD4306B11E01655AC2D5 /* ReviewView.swift in Sources */,
+				32A260CC6ADF116BB7E0BCAA /* RoomExplorer.swift in Sources */,
+				73A1BC2420B3AD3D1231C410 /* SampleRoom.swift in Sources */,
 				66CC42B6D21D6AA34D6EA5B0 /* Scanner.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FCF1A6725FAAF28E16ED9CBE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				51D924E47BA313D7EEF76AA9 /* RoomNavigationTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		544EDE08A772C23B7C7807F5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C9496C33B097CCC2251B9B34 /* DigitalTwins */;
+			targetProxy = 7DDF9F88D91E5133C1CAC48E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		5E960F5F6CE4B7B542EC75E3 /* Debug */ = {
@@ -147,8 +251,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Sources/App/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Digital Twins";
 				INFOPLIST_KEY_NSCameraUsageDescription = "DigitalTwins uses the camera and LiDAR to create a 3D model of your room.";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Digital Twins connects to your local MQTT collector to display equipment readings.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -169,8 +275,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Sources/App/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Digital Twins";
 				INFOPLIST_KEY_NSCameraUsageDescription = "DigitalTwins uses the camera and LiDAR to create a 3D model of your room.";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Digital Twins connects to your local MQTT collector to display equipment readings.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -241,6 +349,40 @@
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
+		};
+		DFD9A80DC7D53448640A79B1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = personal.ntua.DigitalTwinsUITests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = DigitalTwins;
+			};
+			name = Release;
+		};
+		E7D76E16E659C0DC25782A97 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = personal.ntua.DigitalTwinsUITests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = DigitalTwins;
+			};
+			name = Debug;
 		};
 		E999319CBAF00B7F8BEA958D /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -323,6 +465,15 @@
 			buildConfigurations = (
 				E999319CBAF00B7F8BEA958D /* Debug */,
 				94135AE5F75D44305A6A3AC3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		E4BB0A38A7DDBE8F18B1E79F /* Build configuration list for PBXNativeTarget "DigitalTwinsUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E7D76E16E659C0DC25782A97 /* Debug */,
+				DFD9A80DC7D53448640A79B1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

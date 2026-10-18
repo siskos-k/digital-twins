@@ -26,6 +26,8 @@ final class LibraryModel: ObservableObject {
 
 struct LibraryView: View {
     @StateObject private var library = LibraryModel()
+    @State private var showSettings = false
+    @State private var creatingSample = false
     @State private var scanning = false
     @State private var requestingPermission = false
     private let supported = RoomCaptureSession.isSupported
@@ -51,6 +53,22 @@ struct LibraryView: View {
                 }
             }
             .navigationTitle("Digital Twins")
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    Menu {
+                        Button("IoT settings", systemImage: "network") { showSettings = true }
+                        Button(creatingSample ? "Creating sample…" : "Add sample room", systemImage: "cube") {
+                            creatingSample = true
+                            Task { @MainActor in
+                                defer { creatingSample = false }
+                                do { _ = try await SampleRoom.create(in: library.store); library.reload() }
+                                catch { library.error = error.localizedDescription }
+                            }
+                        }.disabled(creatingSample)
+                    } label: { Image(systemName: "ellipsis.circle") }.accessibilityLabel("Room options").accessibilityIdentifier("roomOptions")
+                }
+            }
+            .sheet(isPresented: $showSettings) { IoTSettingsView() }
             .safeAreaInset(edge: .bottom) {
                 VStack(spacing: 12) {
                     if !supported { Text("Scanning requires a LiDAR-equipped iPhone. Saved rooms can still be reviewed and exported.").font(.footnote).foregroundStyle(.secondary) }

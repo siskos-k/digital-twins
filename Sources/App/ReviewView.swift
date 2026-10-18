@@ -12,6 +12,7 @@ struct ReviewView: View {
     @State private var previewDirectory: URL?
     @State private var error: String?
     @State private var busy = false
+    @State private var exploring = false
     @State private var sharing: ShareItems?
     init(captured: CapturedRoom, library: LibraryModel) {
         self.captured = captured; self.library = library
@@ -46,6 +47,9 @@ struct ReviewView: View {
                     .buttonStyle(.borderedProminent).controlSize(.large)
                     .disabled(busy || modelURL == nil || name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                 } else {
+                    Button { exploring = true } label: {
+                        Label("Explore room & equipment", systemImage: "figure.walk").frame(maxWidth: .infinity)
+                    }.buttonStyle(.borderedProminent).controlSize(.large)
                     Label("Saved on this iPhone", systemImage: "checkmark.circle.fill").foregroundStyle(.green)
                     Button {
                         guard let saved else { return }
@@ -70,6 +74,9 @@ struct ReviewView: View {
         .navigationBarTitleDisplayMode(.inline)
         .task { await preparePreview() }
         .onDisappear { cleanupPreview() }
+        .fullScreenCover(isPresented: $exploring) {
+            if let saved { RoomExplorer(room: saved, url: library.store.modelURL(for: saved)) }
+        }
         .sheet(item: $sharing) { ShareSheet(urls: $0.urls, onError: { error = $0 }) }
         .alert("Unable to complete action", isPresented: Binding(get: { error != nil }, set: { if !$0 { error = nil } })) {
             Button("OK", role: .cancel) { error = nil }
