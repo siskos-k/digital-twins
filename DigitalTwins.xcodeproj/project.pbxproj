@@ -9,18 +9,30 @@
 /* Begin PBXBuildFile section */
 		1A7F324C4369AADDB983611F /* RoomTwinCore in Frameworks */ = {isa = PBXBuildFile; productRef = 30A99FA16E407DBF56FAD8E3 /* RoomTwinCore */; };
 		32A260CC6ADF116BB7E0BCAA /* RoomExplorer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067AD2CF576B782924518478 /* RoomExplorer.swift */; };
+		400AF8F121C78990AD108E45 /* FurnitureRenderingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5767878024545B7D624BDF98 /* FurnitureRenderingTests.swift */; };
 		51D924E47BA313D7EEF76AA9 /* RoomNavigationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE433CEA59795DA98670591 /* RoomNavigationTests.swift */; };
 		66CC42B6D21D6AA34D6EA5B0 /* Scanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CCC08477BBD5A5A4819AC8 /* Scanner.swift */; };
 		73A1BC2420B3AD3D1231C410 /* SampleRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000D6B3FCCE8849BF183E9CB /* SampleRoom.swift */; };
 		908B74C29F513D86FC22DCF4 /* EquipmentViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC84AE79CA23A1B215116A5B /* EquipmentViews.swift */; };
+		A250772B2DE8735289FF053A /* Furniture.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4535C31F3043BFD3E58D3DFA /* Furniture.bundle */; };
 		A330661D3DAE964C96B3538A /* SampleRoom.usdz in Resources */ = {isa = PBXBuildFile; fileRef = F6553E33A84489B3E46A1584 /* SampleRoom.usdz */; };
+		B4D8F85BDD3EF39BB4FC0BFC /* FurnishedRoomRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19E8AD006504A557E8B2FFB /* FurnishedRoomRenderer.swift */; };
 		B9BAD4DE4B6BC854ADA16993 /* DigitalTwinsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A801D23AC7BE121A99057338 /* DigitalTwinsApp.swift */; };
+		CC2FADBA7E3BC3A936EF4BF4 /* FurnitureGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED23D18106EA1F8A83F882C /* FurnitureGeometry.swift */; };
 		E667AD4306B11E01655AC2D5 /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E6C1FBEC94D77FA9585114 /* ReviewView.swift */; };
 		F684EAD233E1F5B969F91777 /* IoTSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A86501B9BB51412F607542 /* IoTSettings.swift */; };
+		FD69166F8F7279A4A8A93796 /* SampleRoomFurnished.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 3D2631098C60A87BAD522ACD /* SampleRoomFurnished.usdz */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		7DDF9F88D91E5133C1CAC48E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4828E192B2F75D423EC5056A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C9496C33B097CCC2251B9B34;
+			remoteInfo = DigitalTwins;
+		};
+		E9E16978C2ADBDC522EC369B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4828E192B2F75D423EC5056A /* Project object */;
 			proxyType = 1;
@@ -35,14 +47,20 @@
 		067AD2CF576B782924518478 /* RoomExplorer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomExplorer.swift; sourceTree = "<group>"; };
 		06E6C1FBEC94D77FA9585114 /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
 		18A86501B9BB51412F607542 /* IoTSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IoTSettings.swift; sourceTree = "<group>"; };
+		2F69533A02AC027B9BA81392 /* DigitalTwinsRenderingTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = DigitalTwinsRenderingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D2631098C60A87BAD522ACD /* SampleRoomFurnished.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = SampleRoomFurnished.usdz; sourceTree = "<group>"; };
 		3F9A9BD96658B93EEAAFA285 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		4535C31F3043BFD3E58D3DFA /* Furniture.bundle */ = {isa = PBXFileReference; lastKnownFileType = wrapper.cfbundle; path = Furniture.bundle; sourceTree = "<group>"; };
+		5767878024545B7D624BDF98 /* FurnitureRenderingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FurnitureRenderingTests.swift; sourceTree = "<group>"; };
 		5CE433CEA59795DA98670591 /* RoomNavigationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomNavigationTests.swift; sourceTree = "<group>"; };
 		73C64F3AA62957F023C941DE /* thesis */ = {isa = PBXFileReference; lastKnownFileType = folder; name = thesis; path = .; sourceTree = SOURCE_ROOT; };
 		762B18FB5C74907BFC781647 /* DigitalTwinsUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = DigitalTwinsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		882445692D545912C77815E6 /* DigitalTwins.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = DigitalTwins.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A801D23AC7BE121A99057338 /* DigitalTwinsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitalTwinsApp.swift; sourceTree = "<group>"; };
+		C19E8AD006504A557E8B2FFB /* FurnishedRoomRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FurnishedRoomRenderer.swift; sourceTree = "<group>"; };
 		CC84AE79CA23A1B215116A5B /* EquipmentViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentViews.swift; sourceTree = "<group>"; };
 		F6553E33A84489B3E46A1584 /* SampleRoom.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = SampleRoom.usdz; sourceTree = "<group>"; };
+		FED23D18106EA1F8A83F882C /* FurnitureGeometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FurnitureGeometry.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +80,8 @@
 			children = (
 				A801D23AC7BE121A99057338 /* DigitalTwinsApp.swift */,
 				CC84AE79CA23A1B215116A5B /* EquipmentViews.swift */,
+				C19E8AD006504A557E8B2FFB /* FurnishedRoomRenderer.swift */,
+				FED23D18106EA1F8A83F882C /* FurnitureGeometry.swift */,
 				3F9A9BD96658B93EEAAFA285 /* Info.plist */,
 				18A86501B9BB51412F607542 /* IoTSettings.swift */,
 				06E6C1FBEC94D77FA9585114 /* ReviewView.swift */,
@@ -78,6 +98,7 @@
 			children = (
 				091FD5FDAD743CA1E0AE3CA8 /* App */,
 				CC23580243FCC1374DABB984 /* Packages */,
+				BADF22F8F8062DCDE974294F /* RenderingTests */,
 				BBD562C2C6E650337BC45267 /* Resources */,
 				CB6BE236AD5BCDD220EA06C0 /* UITests */,
 				97B2A1A47CAFFBDEED05E5BF /* Products */,
@@ -88,15 +109,27 @@
 			isa = PBXGroup;
 			children = (
 				882445692D545912C77815E6 /* DigitalTwins.app */,
+				2F69533A02AC027B9BA81392 /* DigitalTwinsRenderingTests.xctest */,
 				762B18FB5C74907BFC781647 /* DigitalTwinsUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
+		BADF22F8F8062DCDE974294F /* RenderingTests */ = {
+			isa = PBXGroup;
+			children = (
+				5767878024545B7D624BDF98 /* FurnitureRenderingTests.swift */,
+			);
+			name = RenderingTests;
+			path = Tests/RenderingTests;
+			sourceTree = "<group>";
+		};
 		BBD562C2C6E650337BC45267 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4535C31F3043BFD3E58D3DFA /* Furniture.bundle */,
 				F6553E33A84489B3E46A1584 /* SampleRoom.usdz */,
+				3D2631098C60A87BAD522ACD /* SampleRoomFurnished.usdz */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -121,6 +154,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		A0809D0246CE6F0D8E32DA27 /* DigitalTwinsRenderingTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 878289F6100B86C3C84F0EDD /* Build configuration list for PBXNativeTarget "DigitalTwinsRenderingTests" */;
+			buildPhases = (
+				FDEED654BD8130D0FF392085 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BB0D2A822F0F30CA5C3614FE /* PBXTargetDependency */,
+			);
+			name = DigitalTwinsRenderingTests;
+			packageProductDependencies = (
+			);
+			productName = DigitalTwinsRenderingTests;
+			productReference = 2F69533A02AC027B9BA81392 /* DigitalTwinsRenderingTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		BEE94FE51F2A3237E5135880 /* DigitalTwinsUITests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E4BB0A38A7DDBE8F18B1E79F /* Build configuration list for PBXNativeTarget "DigitalTwinsUITests" */;
@@ -168,6 +219,9 @@
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
+					A0809D0246CE6F0D8E32DA27 = {
+						DevelopmentTeam = "";
+					};
 					BEE94FE51F2A3237E5135880 = {
 						DevelopmentTeam = "";
 						TestTargetID = C9496C33B097CCC2251B9B34;
@@ -195,6 +249,7 @@
 			projectRoot = "";
 			targets = (
 				C9496C33B097CCC2251B9B34 /* DigitalTwins */,
+				A0809D0246CE6F0D8E32DA27 /* DigitalTwinsRenderingTests */,
 				BEE94FE51F2A3237E5135880 /* DigitalTwinsUITests */,
 			);
 		};
@@ -205,7 +260,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A250772B2DE8735289FF053A /* Furniture.bundle in Resources */,
 				A330661D3DAE964C96B3538A /* SampleRoom.usdz in Resources */,
+				FD69166F8F7279A4A8A93796 /* SampleRoomFurnished.usdz in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,6 +275,8 @@
 			files = (
 				B9BAD4DE4B6BC854ADA16993 /* DigitalTwinsApp.swift in Sources */,
 				908B74C29F513D86FC22DCF4 /* EquipmentViews.swift in Sources */,
+				B4D8F85BDD3EF39BB4FC0BFC /* FurnishedRoomRenderer.swift in Sources */,
+				CC2FADBA7E3BC3A936EF4BF4 /* FurnitureGeometry.swift in Sources */,
 				F684EAD233E1F5B969F91777 /* IoTSettings.swift in Sources */,
 				E667AD4306B11E01655AC2D5 /* ReviewView.swift in Sources */,
 				32A260CC6ADF116BB7E0BCAA /* RoomExplorer.swift in Sources */,
@@ -234,6 +293,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FDEED654BD8130D0FF392085 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				400AF8F121C78990AD108E45 /* FurnitureRenderingTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -242,9 +309,48 @@
 			target = C9496C33B097CCC2251B9B34 /* DigitalTwins */;
 			targetProxy = 7DDF9F88D91E5133C1CAC48E /* PBXContainerItemProxy */;
 		};
+		BB0D2A822F0F30CA5C3614FE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C9496C33B097CCC2251B9B34 /* DigitalTwins */;
+			targetProxy = E9E16978C2ADBDC522EC369B /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		306B9DB76315B64B4351F1CE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = personal.ntua.DigitalTwinsRenderingTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DigitalTwins.app/DigitalTwins";
+			};
+			name = Debug;
+		};
+		3D89915124B6A53D20902F06 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = personal.ntua.DigitalTwinsRenderingTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DigitalTwins.app/DigitalTwins";
+			};
+			name = Release;
+		};
 		5E960F5F6CE4B7B542EC75E3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -465,6 +571,15 @@
 			buildConfigurations = (
 				E999319CBAF00B7F8BEA958D /* Debug */,
 				94135AE5F75D44305A6A3AC3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		878289F6100B86C3C84F0EDD /* Build configuration list for PBXNativeTarget "DigitalTwinsRenderingTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				306B9DB76315B64B4351F1CE /* Debug */,
+				3D89915124B6A53D20902F06 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

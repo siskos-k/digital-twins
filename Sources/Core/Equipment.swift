@@ -39,6 +39,7 @@ public struct Equipment: Codable, Identifiable, Equatable {
     public var name: String
     public var kind: EquipmentKind
     public var position: RoomPosition
+    public var surfaceNormal: RoomPosition?
     public var manufacturer: String
     public var model: String
     public var notes: String

@@ -8,7 +8,7 @@ enum SampleRoom {
             throw EquipmentError.invalid("The sample model is missing from the app bundle.")
         }
         return try await Task.detached(priority: .userInitiated) {
-            try store.save(name: "Sample room · simulated", elements: [], capturedJSON: Data("{\"source\":\"simulated\",\"description\":\"Synthetic room; not a RoomPlan scan\"}".utf8)) { destination in
+            try store.save(name: "Sample room · simulated", elements: [], capturedJSON: Data("{\"source\":\"simulated\",\"sampleVersion\":2,\"description\":\"Synthetic room; not a RoomPlan scan\"}".utf8)) { destination in
                 try FileManager.default.copyItem(at: source, to: destination)
             }
         }.value

@@ -1,5 +1,6 @@
 import SwiftUI
 import SceneKit
+import simd
 import RoomTwinCore
 
 enum ExploreMode: String, CaseIterable { case orbit = "Overview", walk = "Walk inside" }
@@ -8,6 +9,10 @@ struct RoomExplorer: View {
     let room: SavedRoom
     let url: URL
     @StateObject private var inventory: EquipmentRoomModel
+    @AppStorage("roomAppearance") private var appearance = RoomAppearance.furnished
+    @State private var furnishedURL: URL?
+    @State private var furnishing = false
+    @State private var furnishingError: String?
     @State private var mode = ExploreMode.orbit
     @State private var placing = false
     @State private var moving: Equipment?
@@ -25,13 +30,22 @@ struct RoomExplorer: View {
         NavigationStack {
             VStack(spacing: 0) {
                 Picker("View", selection: $mode) { ForEach(ExploreMode.allCases, id: \.self) { Text($0.rawValue).tag($0) } }.pickerStyle(.segmented).padding()
-                ExplorerSurface(url: url, mode: mode, placing: placing, devices: inventory.devices, reset: reset,
-                    onPlace: { position in
+                Picker("Appearance", selection: $appearance) {
+                    ForEach(RoomAppearance.allCases, id: \.self) { Text($0.rawValue).tag($0) }
+                }.pickerStyle(.segmented).accessibilityIdentifier("explorerAppearance").padding(.horizontal).padding(.bottom, 8)
+                if appearance == .furnished {
+                    if furnishing { ProgressView("Preparing furniture…").font(.caption).padding(.bottom, 8) }
+                    else { Text(furnishingError ?? "Representative furniture · equipment sizes are illustrative").font(.caption).foregroundStyle(.secondary).padding(.horizontal).padding(.bottom, 8) }
+                }
+                ExplorerSurface(url: appearance == .furnished ? furnishedURL ?? url : url, mode: mode, appearance: appearance,
+                    placing: placing, devices: inventory.devices, reset: reset,
+                    onPlace: { position, normal in
                         if var device = moving {
-                            device.position = position
+                            device.position = position; device.surfaceNormal = normal
                             Task { if await inventory.save(device) { placing = false; moving = nil } }
                         } else {
-                            editor = Equipment(roomID: room.id, position: position)
+                            var device = Equipment(roomID: room.id, position: position)
+                            device.surfaceNormal = normal; editor = device
                             placing = false
                         }
                     }, onSelect: { selected = $0 }, onError: { error = $0 })
@@ -62,7 +76,15 @@ struct RoomExplorer: View {
                 ToolbarItem(placement: .cancellationAction) { Button("Close") { dismiss() } }
                 ToolbarItem(placement: .primaryAction) { Button("IoT settings", systemImage: "network") { settings = true } }
             }
-            .task { await inventory.load() }
+            .task {
+                await inventory.load()
+                furnishing = true
+                defer { furnishing = false }
+                do {
+                    let json = try Data(contentsOf: url.deletingLastPathComponent().appendingPathComponent("room.json"))
+                    furnishedURL = try await FurnishedRoomRenderer.shared.model(json: json)
+                } catch { furnishingError = "Showing scan geometry. Furniture unavailable: \(error.localizedDescription)" }
+            }
             .sheet(item: $editor) { EquipmentEditor(inventory: inventory, device: $0) }
             .sheet(item: $selected) { device in
                 EquipmentDetail(id: device.id, inventory: inventory, move: { moving = $0; placing = true })
@@ -78,10 +100,11 @@ struct RoomExplorer: View {
 struct ExplorerSurface: UIViewRepresentable {
     let url: URL
     let mode: ExploreMode
+    let appearance: RoomAppearance
     let placing: Bool
     let devices: [Equipment]
     let reset: UUID
-    let onPlace: (RoomPosition) -> Void
+    let onPlace: (RoomPosition, RoomPosition) -> Void
     let onSelect: (Equipment) -> Void
     let onError: (String) -> Void
     func makeCoordinator() -> Coordinator { Coordinator(self) }
@@ -104,7 +127,12 @@ struct ExplorerSurface: UIViewRepresentable {
     func updateUIView(_ uiView: SCNView, context: Context) {
         let coordinator = context.coordinator
         let changed = coordinator.parent.mode != mode || coordinator.parent.reset != reset
+        let changedModel = coordinator.parent.url != url
         coordinator.parent = self
+        if changedModel {
+            do { try coordinator.load(preservingCamera: true) }
+            catch { DispatchQueue.main.async { onError(error.localizedDescription) } }
+        }
         uiView.allowsCameraControl = mode == .orbit && !placing
         if changed { coordinator.resetCamera() }
         coordinator.updateMarkers()
@@ -117,9 +145,11 @@ struct ExplorerSurface: UIViewRepresentable {
         var minimum = SCNVector3Zero, maximum = SCNVector3Zero
         var yaw: Float = 0, pitch: Float = 0
         var shownDevices: [Equipment] = []
+        var shownAppearance: RoomAppearance?
         init(_ parent: ExplorerSurface) { self.parent = parent }
-        func load() throws {
+        func load(preservingCamera: Bool = false) throws {
             guard let view else { return }
+            let previousCamera = preservingCamera ? view.pointOfView?.simdWorldTransform : nil
             let scene = try SCNScene(url: parent.url)
             view.scene = scene
             let bounds = scene.rootNode.boundingBox
@@ -138,7 +168,9 @@ struct ExplorerSurface: UIViewRepresentable {
             floor.geometry?.firstMaterial?.diffuse.contents = UIColor.systemTeal.withAlphaComponent(0.12)
             floor.geometry?.firstMaterial?.isDoubleSided = true
             scene.rootNode.addChildNode(floor)
-            resetCamera(); updateMarkers()
+            if let previousCamera { camera.simdTransform = previousCamera; view.pointOfView = camera }
+            else { resetCamera() }
+            shownAppearance = nil; updateMarkers()
         }
         func resetCamera() {
             guard let view else { return }
@@ -156,22 +188,40 @@ struct ExplorerSurface: UIViewRepresentable {
             }
         }
         func updateMarkers() {
-            guard shownDevices != parent.devices else { return }
-            shownDevices = parent.devices
+            guard shownDevices != parent.devices || shownAppearance != parent.appearance else { return }
+            shownDevices = parent.devices; shownAppearance = parent.appearance
             markers.childNodes.forEach { $0.removeFromParentNode() }
             for device in parent.devices {
-                let marker = SCNNode(geometry: SCNSphere(radius: 0.13))
-                marker.name = device.id.uuidString; marker.categoryBitMask = 4
+                let marker = SCNNode()
+                marker.name = device.id.uuidString
                 marker.position = SCNVector3(device.position.x, device.position.y, device.position.z)
-                marker.geometry?.firstMaterial?.diffuse.contents = UIColor.systemOrange
-                marker.geometry?.firstMaterial?.emission.contents = UIColor.systemOrange.withAlphaComponent(0.4)
+                if parent.appearance == .furnished {
+                    let category = device.kind == .airConditioner ? "ac" : device.kind == .light ? "light" : "sensor"
+                    let model = FurnitureGeometry.make(category)
+                    if device.kind == .airConditioner { model.scale = SCNVector3(0.9, 0.9, 0.9) }
+                    model.position.z = 0.08
+                    marker.addChildNode(model)
+                    if let normal = device.surfaceNormal {
+                        let vector = SIMD3<Float>(normal.x, normal.y, normal.z)
+                        if abs(normal.y) < 0.7 && simd_length(vector) > 0.1 {
+                            marker.simdOrientation = simd_quatf(from: SIMD3<Float>(0, 0, 1), to: simd_normalize(vector))
+                        }
+                    }
+                }
+                let beacon = SCNNode(geometry: SCNSphere(radius: parent.appearance == .furnished ? 0.035 : 0.13))
+                beacon.position = parent.appearance == .furnished ? SCNVector3(0, 0.2, 0.18) : SCNVector3Zero
+                beacon.geometry?.firstMaterial?.diffuse.contents = UIColor.systemOrange
+                beacon.geometry?.firstMaterial?.emission.contents = UIColor.systemOrange.withAlphaComponent(0.4)
+                marker.addChildNode(beacon)
                 let label = SCNText(string: device.name, extrusionDepth: 0)
-                label.font = .systemFont(ofSize: 0.16, weight: .semibold)
-                label.flatness = 0.2
+                label.font = .systemFont(ofSize: 0.16, weight: .semibold); label.flatness = 0.2
                 label.firstMaterial?.diffuse.contents = UIColor.label
-                let text = SCNNode(geometry: label); text.position = SCNVector3(0.16, 0.12, 0); text.categoryBitMask = 4
+                let text = SCNNode(geometry: label); text.position = SCNVector3(0.16, 0.3, 0)
                 text.constraints = [SCNBillboardConstraint()]
-                marker.addChildNode(text); markers.addChildNode(marker)
+                marker.addChildNode(text)
+                marker.enumerateChildNodes { node, _ in node.categoryBitMask = 4 }
+                marker.categoryBitMask = 4
+                markers.addChildNode(marker)
             }
         }
         @objc func tap(_ gesture: UITapGestureRecognizer) {
@@ -192,7 +242,7 @@ struct ExplorerSurface: UIViewRepresentable {
             if parent.placing {
                 let position = hit.worldCoordinates
                 let normal = hit.worldNormal
-                parent.onPlace(RoomPosition(x: position.x + normal.x * 0.08, y: position.y + normal.y * 0.08, z: position.z + normal.z * 0.08))
+                parent.onPlace(RoomPosition(x: position.x + normal.x * 0.08, y: position.y + normal.y * 0.08, z: position.z + normal.z * 0.08), RoomPosition(x: normal.x, y: normal.y, z: normal.z))
             } else if parent.mode == .walk {
                 guard hit.node.name == "navigation-floor" || (hit.worldNormal.y > 0.7 && abs(hit.worldCoordinates.y - minimum.y) < 0.15) else { return }
                 let target = SCNVector3(hit.worldCoordinates.x, camera.position.y, hit.worldCoordinates.z)

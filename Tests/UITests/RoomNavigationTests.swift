@@ -11,6 +11,14 @@ final class RoomNavigationTests: XCTestCase {
         sample.tap()
         app.buttons["Explore room & equipment"].tap()
         XCTAssertTrue(app.buttons["Add equipment"].waitForExistence(timeout: 10))
+        app.segmentedControls["explorerAppearance"].buttons["Furnished"].tap()
+        XCTAssertTrue(app.staticTexts["Representative furniture · equipment sizes are illustrative"].waitForExistence(timeout: 10))
+        let furnished = XCTAttachment(screenshot: app.screenshot()); furnished.name = "Furnished room"; furnished.lifetime = .keepAlways
+        add(furnished)
+        app.segmentedControls["explorerAppearance"].buttons["Scan geometry"].tap()
+        let original = XCTAttachment(screenshot: app.screenshot()); original.name = "Original scan boxes"; original.lifetime = .keepAlways
+        add(original)
+        app.segmentedControls["explorerAppearance"].buttons["Furnished"].tap()
         app.buttons["Add equipment"].tap()
         let scene = app.otherElements["roomScene"].firstMatch
         XCTAssertTrue(scene.waitForExistence(timeout: 5))

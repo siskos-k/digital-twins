@@ -35,6 +35,15 @@ targets:
         INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
         INFOPLIST_KEY_UILaunchScreen_Generation: YES
         INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
+  DigitalTwinsRenderingTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources: [Tests/RenderingTests]
+    dependencies:
+      - target: DigitalTwins
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
   DigitalTwinsUITests:
     type: bundle.ui-testing
     platform: iOS
@@ -50,4 +59,4 @@ schemes:
       targets:
         DigitalTwins: all
     test:
-      targets: [DigitalTwinsUITests]
+      targets: [DigitalTwinsRenderingTests, DigitalTwinsUITests]

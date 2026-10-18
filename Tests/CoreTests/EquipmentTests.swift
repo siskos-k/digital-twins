@@ -53,6 +53,15 @@ final class EquipmentTests: XCTestCase {
         device.position.y = 1; device.name = "  "
         XCTAssertThrowsError(try device.validated())
     }
+    func testLegacyEquipmentAndSurfaceNormalRoundTrip() throws {
+        var device = Equipment(roomID: UUID(), name: "AC", kind: .airConditioner, position: .init(x: 1, y: 2, z: 0))
+        var json = try JSONSerialization.jsonObject(with: JSONEncoder().encode(device)) as! [String: Any]
+        json.removeValue(forKey: "surfaceNormal")
+        let old = try JSONDecoder().decode(Equipment.self, from: JSONSerialization.data(withJSONObject: json))
+        XCTAssertNil(old.surfaceNormal)
+        device.surfaceNormal = .init(x: 0, y: 0, z: 1)
+        XCTAssertEqual(try JSONDecoder().decode(Equipment.self, from: JSONEncoder().encode(device)), device)
+    }
     func testTelemetryEndpointValidation() throws {
         XCTAssertThrowsError(try TelemetryClient(endpoint: "file:///tmp", token: "token"))
         XCTAssertThrowsError(try TelemetryClient(endpoint: "http://collector.local:8080", token: ""))

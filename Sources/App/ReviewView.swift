@@ -7,6 +7,10 @@ struct ReviewView: View {
     private let captured: CapturedRoom?
     @ObservedObject var library: LibraryModel
     @State private var saved: SavedRoom?
+    @AppStorage("roomAppearance") private var appearance = RoomAppearance.furnished
+    @State private var furnishedURL: URL?
+    @State private var furnishing = false
+    @State private var furnishingError: String?
     @State private var name = ""
     @State private var modelURL: URL?
     @State private var previewDirectory: URL?
@@ -35,9 +39,17 @@ struct ReviewView: View {
             VStack(alignment: .leading, spacing: 20) {
                 Group {
                     if let modelURL {
-                        ModelViewer(url: modelURL, onError: { error = $0 })
+                        ModelViewer(url: appearance == .furnished ? furnishedURL ?? modelURL : modelURL, onError: { error = $0 })
+                            .id(appearance == .furnished ? furnishedURL ?? modelURL : modelURL)
                     } else { ProgressView("Preparing model…").frame(maxWidth: .infinity) }
                 }.frame(height: 300).background(Color(.secondarySystemBackground)).clipShape(RoundedRectangle(cornerRadius: 16))
+                Picker("Appearance", selection: $appearance) {
+                    ForEach(RoomAppearance.allCases, id: \.self) { Text($0.rawValue).tag($0) }
+                }.pickerStyle(.segmented).accessibilityIdentifier("reviewAppearance")
+                if appearance == .furnished {
+                    if furnishing { ProgressView("Preparing furniture…") }
+                    else { Text(furnishingError ?? "Representative furniture fitted to the scan; original dimensions are unchanged.").font(.caption).foregroundStyle(.secondary) }
+                }
                 Text("Drag to rotate · Pinch to zoom").font(.caption).foregroundStyle(.secondary).frame(maxWidth: .infinity)
                 if saved == nil {
                     TextField("Room name", text: $name).textFieldStyle(.roundedBorder).disabled(busy)
@@ -72,7 +84,18 @@ struct ReviewView: View {
         }
         .navigationTitle(saved?.name ?? "Review room")
         .navigationBarTitleDisplayMode(.inline)
-        .task { await preparePreview() }
+        .task {
+            await preparePreview()
+            furnishing = true
+            defer { furnishing = false }
+            do {
+                let json: Data
+                if let captured { json = try JSONEncoder().encode(captured) }
+                else if let saved { json = try Data(contentsOf: library.store.directory(for: saved).appendingPathComponent("room.json")) }
+                else { return }
+                furnishedURL = try await FurnishedRoomRenderer.shared.model(json: json)
+            } catch { furnishingError = "Showing scan geometry. Furniture unavailable: \(error.localizedDescription)" }
+        }
         .onDisappear { cleanupPreview() }
         .fullScreenCover(isPresented: $exploring) {
             if let saved { RoomExplorer(room: saved, url: library.store.modelURL(for: saved)) }
